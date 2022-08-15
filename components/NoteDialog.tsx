@@ -91,13 +91,13 @@ const NoteDialog = ({ open, onClose, note}: Props) => {
       { processing && <CircularProgress size={24} /> }
       </DialogContent>
       <DialogActions>
-        <IconButton>
+        <IconButton tooltip="Add Alert">
           <AddAlert fontSize="inherit" />
         </IconButton>
-        <IconButton>
+        <IconButton tooltip="Add Label">
           <Label fontSize="inherit" />
         </IconButton>
-        <IconButton onClick={handleDelete}>
+        <IconButton tooltip="Delete" onClick={handleDelete}>
           <Delete fontSize="inherit" />
         </IconButton>
         <div style={{flex: '1 0 0'}} />

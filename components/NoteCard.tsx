@@ -68,15 +68,15 @@ const NoteCard = ({ note, onCloseDialog }: Props) => {
         </CardContent>
       </CardActionArea>
       <CardActions className="show-on-hover">
-        <IconButton>
+        <IconButton tooltip="Add Alert">
           <AddAlert fontSize="inherit" />
         </IconButton>
-        <IconButton>
+        <IconButton tooltip="Add Label">
           <Label fontSize="inherit" />
         </IconButton>
         { processing && <CircularProgress size={24} /> }
         <div style={{flex: '1 0 0'}} />
-        <IconButton onClick={handleDelete}>
+        <IconButton tooltip="Delete" onClick={handleDelete}>
           <Delete fontSize="inherit" />
         </IconButton>
       </CardActions>

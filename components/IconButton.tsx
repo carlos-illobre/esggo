@@ -5,13 +5,14 @@ import {
 } from '@mui/material'
 
 type Props = {
+  tooltip: string,
   children: ReactNode,
-  onClick?: () => Promise<void>
+  onClick?: () => Promise<void>,
 }
 
-export default ({ children, onClick }: Props) => {
+export default ({ children, onClick, tooltip }: Props) => {
   return (
-    <Tooltip title="Add Alert" placement="top">
+    <Tooltip title={tooltip} placement="top">
       <IconButton aria-label="add alert" size="small" onClick={onClick}>
         {children}
       </IconButton>
