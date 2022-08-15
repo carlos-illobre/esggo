@@ -3,14 +3,23 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "test": "jest --watch",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "db:migration": "prisma migrate dev"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.10.0",
+    "@prisma/client": "^4.2.1",
     "next": "latest",
+    "next-swagger-doc": "^0.3.6",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "swagger-ui-react": "^4.13.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.4",
@@ -19,6 +28,7 @@
     "@types/react": "18.0.9",
     "jest": "28.1.0",
     "jest-environment-jsdom": "28.1.0",
+    "prisma": "^4.2.1",
     "typescript": "4.6.4"
   }
 }

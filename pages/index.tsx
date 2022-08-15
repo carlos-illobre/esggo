@@ -1,65 +1,39 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import { useState, useEffect } from 'react'
+import type { NextPage } from 'next'
+import { Grid, Container } from '@mui/material'
+import NoteCard from '../components/NoteCard'
+import NoteInput from '../components/NoteInput'
+import { Note } from '../model'
+import { noteService } from '../services'
 
-import styles from '@/pages/index.module.css'
+const Home: NextPage = () => {
+  const [notes, setNotes] = useState<Note[]>([])
 
-export default function Home() {
+  useEffect(() => {
+    noteService.list().then(setNotes)
+  })
+  
+  const handleCloseDialog = async () => {
+    setNotes(await noteService.list())
+  }
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a href="https://vercel.com/new" className={styles.card}>
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
+    <Container>
+      <Grid container spacing={2}>
+        <Grid item xs={12} />
+        <NoteInput onCloseDialog={handleCloseDialog} />
+        <Grid item xs={12}>
+          <Grid container spacing={2}>
+            {notes.map(note => (
+              <Grid item sm={3} xs={6} key={note.id}>
+                <NoteCard note={note} onCloseDialog={handleCloseDialog} />
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+      </Grid>
+    </Container>
   )
 }
+
+export default Home
