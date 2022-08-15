@@ -16,10 +16,8 @@
     "@mui/material": "^5.10.0",
     "@prisma/client": "^4.2.1",
     "next": "latest",
-    "next-swagger-doc": "^0.3.6",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "swagger-ui-react": "^4.13.2"
+    "react-dom": "^18.1.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.4",

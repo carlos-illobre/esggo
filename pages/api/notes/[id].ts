@@ -4,7 +4,7 @@ import { Note } from '../../../model'
 
 const PUT = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { id } = req.query
+    const id = req.query.id as string
     if (id) {
       const { title, content } = req.body
       await db.note.update({
@@ -22,7 +22,7 @@ const PUT = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const DELETE = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { id } = req.query
+    const id = req.query.id as string
     if (id) {
       await db.note.delete({
         where: { id: parseInt(id) },
