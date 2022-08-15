@@ -9,10 +9,8 @@ type Props = {
 
 const NoteInput = ({ onCloseDialog }: Props) => {
   const [dialogOpen, setDialogOpen] = useState(false)
-  const [note, setNote] = useState(createNote())
   
   const handleTakeNote = () => {
-    setNote(createNote())
     setDialogOpen(true)
   }
 
@@ -23,7 +21,7 @@ const NoteInput = ({ onCloseDialog }: Props) => {
 
   return (
     <Grid item xs={12} sx={{ visibility: dialogOpen ? "hidden" : "visible" }}>
-      <NoteDialog note={note} open={dialogOpen} onClose={handleCloseDialog} />
+      <NoteDialog open={dialogOpen} onClose={handleCloseDialog} />
       <TextField
         disabled
         variant="outlined"

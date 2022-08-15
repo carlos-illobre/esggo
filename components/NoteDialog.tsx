@@ -26,30 +26,40 @@ import { noteService } from '../services'
 
 type Props = {
   open: boolean,
-  note: Note,
+  note?: Note,
   onClose: () => Promise<void>,
 }
 
 const NoteDialog = ({ open, onClose, note}: Props) => {
   const [processing, setProcessing] = useState(false)
-  const [title, setTitle] = useState(note.title)
-  const [content, setContent] = useState(note.content)
+  const [title, setTitle] = useState(note ? note.title : '')
+  const [content, setContent] = useState(note ? note.content : '')
 
-  const validateForm = (): boolean => (!!title || !!content) && (title != note.title || content != note.content)
+  const validateForm = (): boolean => (!!title || !!content) && (!note || title != note.title || content != note.content)
+  const clearForm = () => {
+    setTitle('')
+    setContent('')
+  } 
 
   const handleClose = async (): Promise<void> => {
     if (!processing && validateForm()) {
       setProcessing(true)
-      await noteService.save({ id: note.id, title, content })
+      await noteService.save({
+        id: note ? note.id : undefined,
+        title,
+        content,
+      })
+      if (!note) clearForm()
       setProcessing(false)
     } 
     onClose()
   }
 
   const handleDelete = async () => {
-    if (note.id && !processing) {
+    if (note && note.id && !processing) {
       setProcessing(true)
       await noteService.delete(note.id)
+      if (!note) clearForm()
       setProcessing(false)
     }
     onClose()
